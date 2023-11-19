@@ -1,10 +1,10 @@
 ﻿using CleanArchitecture.Application.Features.CarFeatures.Commands.CreateCar;
+using CleanArchitecture.Application.Features.CarFeatures.Commands.UpdateCar;
 using CleanArchitecture.Application.Features.CarFeatures.Queries.GetAllCar;
 using CleanArchitecture.Domain.Dtos;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Infrastructure.Authorization;
 using CleanArchitecture.Presentation.Abstraction;
-using EntityFrameworkCorePagination.Nuget.Pagination;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,11 +23,19 @@ namespace CleanArchitecture.Presentation.Controllers
             return Ok(response);
         }
 
+        //[TypeFilter(typeof(RoleAttribute), Arguments = new Object[] {"Create"})]
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Update(UpdateCarCommand request, CancellationToken cancellationToken)
+        {
+            MessageResponse response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+
         [RoleFilter("GetAll")]
         [HttpPost("[action]")]
         public async Task<IActionResult> GetAll(GetAllCarQuery getAllCarQuery, CancellationToken cancellationToken)
         {
-            PaginationResult<Car> cars = await _mediator.Send(getAllCarQuery, cancellationToken);
+            List<Car> cars = await _mediator.Send(getAllCarQuery);
             return Ok(cars);
         }
     }

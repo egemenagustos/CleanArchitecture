@@ -1,7 +1,7 @@
 ﻿using CleanArchitecture.Application.Features.CarFeatures.Commands.CreateCar;
+using CleanArchitecture.Application.Features.CarFeatures.Commands.UpdateCar;
 using CleanArchitecture.Application.Features.CarFeatures.Queries.GetAllCar;
 using CleanArchitecture.Domain.Entities;
-using EntityFrameworkCorePagination.Nuget.Pagination;
 
 namespace CleanArchitecture.Application.Service
 {
@@ -9,6 +9,8 @@ namespace CleanArchitecture.Application.Service
     {
         Task CreateAsync(CreateCarCommand request, CancellationToken cancellationToken);
 
-        Task<PaginationResult<Car>> GetAllAsync(GetAllCarQuery getAllCarQueryHandler, CancellationToken cancellationToken);
+        Task UpdateAsync(UpdateCarCommand request, CancellationToken cancellationToken);
+
+        Task<List<Car>> GetAll(GetAllCarQuery getAllCarQueryHandler, CancellationToken cancellationToken);
     }
 }

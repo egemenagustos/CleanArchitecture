@@ -1,5 +1,7 @@
 ﻿using CleanArchitecture.Application.Abstractions;
+using CleanArchitecture.Application.Service;
 using CleanArchitecture.Infrastructure.Authentication;
+using CleanArchitecture.Infrastructure.Caching;
 using CleanArchitecture.WebAPI.OptionsSetup;
 
 namespace CleanArchitecture.WebAPI.Configurations
@@ -11,6 +13,11 @@ namespace CleanArchitecture.WebAPI.Configurations
             services.AddScoped<IJwtProvider, JwtProvider>();
             services.ConfigureOptions<JwtOptionsSetup>();
             services.ConfigureOptions<JwtBearerOptionsSetup>();
+
+            services.AddSingleton<IRedisCacheService>(sp =>
+            {
+                return new RedisCacheService(configuration.GetConnectionString("RedisConnection"));
+            });
         }
     }
 }

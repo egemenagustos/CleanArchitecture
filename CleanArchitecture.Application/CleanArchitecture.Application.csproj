@@ -10,6 +10,7 @@
     <PackageReference Include="EntityFrameworkCore.Pagination" Version="7.0.5" />
     <PackageReference Include="FluentValidation" Version="11.8.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.4" />
   </ItemGroup>
 
   <ItemGroup>

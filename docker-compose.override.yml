@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  cleanarchitecture.webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "5000:80"
+      - "5001:443"
